@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Collections;
@@ -8,12 +7,17 @@ public class List<T> : IList<T>
 {
     private const int DefaultCapacity = 8;
     
+    // The internal array.
     private T[] items;
+    
+    // The number of elements the List is currently using from the internal array.
     private int listLength;
+    
     private static readonly T[] emptyArray = new T[0];
     
     public List()
     {
+        // Unused List will initialise as an empty array to not waste space.
         items = emptyArray;
     }
 
@@ -22,6 +26,10 @@ public class List<T> : IList<T>
         items = capacity <= 0 ? emptyArray : new T[capacity];
     }
     
+    /// <summary>
+    /// The size of the internal array. For most performance, always set it slightly higher than the largest
+    /// the List will be.
+    /// </summary>
     public int Capacity
     {
         get => items.Length;
@@ -48,19 +56,23 @@ public class List<T> : IList<T>
     
     public int Add(T value)
     {
+        // The internal array hasn't reached it's limit yet.
         if ((uint)listLength < (uint)items.Length)
         {
+            // Simply add to the end of the internal array and increment the listLength.
             listLength++;
             items[listLength - 1] = value;
             return listLength - 1;
         }
         
+        // The internal array has reached it's limit, resize is needed.
         return AddWithResize(value);
     }
     
     private int AddWithResize(T item)
     {
         Grow(listLength + 1);
+        
         items[listLength] = item;
         listLength++;
         return listLength - 1;
@@ -68,14 +80,17 @@ public class List<T> : IList<T>
     
     private void Grow(int capacity)
     {
+        // Calculate the new capacity required.
         int newCapacity = items.Length == 0 ? DefaultCapacity : 2 * items.Length;
 
+        // Ensure newCapacity cannot exceed the maximum array size in .NET.
         if ((uint)newCapacity > Array.MaxLength) 
             newCapacity = Array.MaxLength;
 
         if (newCapacity < capacity) 
             newCapacity = capacity;
 
+        // Set the new Capacity.
         Capacity = newCapacity;
     }
 
@@ -91,7 +106,7 @@ public class List<T> : IList<T>
         
         listLength = 0;
     }
-
+    
     public bool Remove(T value)
     {
         var index = Array.IndexOf(items, value, 0, listLength);
@@ -139,7 +154,7 @@ public class List<T> : IList<T>
         value = items[index];
         return true;
     }
-
+    
     public void Insert(int index, T value)
     {
         if ((uint)index > (uint)listLength)

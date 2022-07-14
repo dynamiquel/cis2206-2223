@@ -5,6 +5,8 @@ namespace Collections;
 
 public class Stack<T> : IStack<T>
 {
+    // Cba doing documentation for Stack since it's almost identical to a List.
+    
     private const int DefaultCapacity = 8;
     
     private T[] items;
