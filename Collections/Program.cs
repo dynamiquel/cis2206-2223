@@ -44,7 +44,8 @@ Console.WriteLine(seven);
 // Proof of Contains working.
 Console.WriteLine(intList.Contains(8));*/
 
-var stringStack = new Collections.Stack<string>();
+
+/*var stringStack = new Collections.Stack<string>();
 Console.WriteLine(stringStack.ToString());
 
 // Proof for Add.
@@ -77,4 +78,47 @@ var peek = stringStack.Peek();
 Console.WriteLine(peek);
 
 // Proof of Contains working.
-Console.WriteLine(stringStack.Contains("Five"));
+Console.WriteLine(stringStack.Contains("Five"));*/
+
+
+var stringQueue = new Collections.Queue<string>();
+Console.WriteLine(stringQueue.ToString());
+
+// Proof for Add.
+stringQueue.Add("Nine");
+Console.WriteLine(stringQueue.ToString());
+
+// Proof for end of list Insertion.
+stringQueue.Enqueue("Eight");
+Console.WriteLine(stringQueue.ToString());
+
+stringQueue.Enqueue("Seven");
+
+// Proof of Pop.
+Console.WriteLine(stringQueue.Dequeue());
+Console.WriteLine(stringQueue.ToString());
+
+// Proof of reaching Capacity.
+stringQueue.Enqueue("Six");
+stringQueue.Enqueue("Five");
+stringQueue.Enqueue("Four");
+stringQueue.Enqueue("Three");
+stringQueue.Enqueue("Two");
+Console.WriteLine(stringQueue.ToString());
+
+// Proof of internal array growth (Capacity increase).
+stringQueue.Enqueue("One");
+Console.WriteLine(stringQueue.ToString());
+
+// Proof of Pop.
+Console.WriteLine(stringQueue.Dequeue());
+Console.WriteLine(stringQueue.ToString());
+
+// Proof of Peek.
+var peek = stringQueue.Peek();
+Console.WriteLine(peek);
+
+// Proof of Contains working.
+Console.WriteLine(stringQueue.Contains("Five"));
+
+// Proof of circular

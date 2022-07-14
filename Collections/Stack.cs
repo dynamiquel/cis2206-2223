@@ -60,6 +60,9 @@ public class Stack<T> : IStack<T>
 
     public void Clear()
     {
+        if (stackLength == 0)
+            return;
+        
         if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
             Array.Clear(items, 0, stackLength);
         
@@ -68,6 +71,9 @@ public class Stack<T> : IStack<T>
 
     public T[] ToArray()
     {
+        if (stackLength == 0)
+            return Array.Empty<T>();
+        
         var copiedArray = new T[stackLength];
         Array.Copy(items, copiedArray, stackLength);
         return copiedArray;
@@ -98,15 +104,11 @@ public class Stack<T> : IStack<T>
 
     public void Push(T item)
     {
-        int size = stackLength;
-        T[] array = items;
-        if ((uint) size < (uint) array.Length)
-        {
-            array[size] = item;
-            stackLength = size + 1;
-        }
-        else
-            PushWithResize(item);
+        if ((uint) stackLength == (uint) items.Length)
+            Grow(stackLength + 1);
+        
+        items[stackLength] = item;
+        stackLength++;
     }
     
     private void PushWithResize(T item)

@@ -56,28 +56,16 @@ public class List<T> : IList<T>
     
     public int Add(T value)
     {
-        // The internal array hasn't reached it's limit yet.
-        if ((uint)listLength < (uint)items.Length)
-        {
-            // Simply add to the end of the internal array and increment the listLength.
-            listLength++;
-            items[listLength - 1] = value;
-            return listLength - 1;
-        }
+        // The internal array has reached it's limit, grow.
+        if ((uint)listLength == (uint)items.Length)
+            Grow(listLength + 1);
         
-        // The internal array has reached it's limit, resize is needed.
-        return AddWithResize(value);
-    }
-    
-    private int AddWithResize(T item)
-    {
-        Grow(listLength + 1);
-        
-        items[listLength] = item;
+        // Add the item to the of the internal array and increment the listLength.
         listLength++;
+        items[listLength - 1] = value;
         return listLength - 1;
     }
-    
+
     private void Grow(int capacity)
     {
         // Calculate the new capacity required.
