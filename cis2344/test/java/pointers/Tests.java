@@ -1,8 +1,9 @@
-﻿namespace Pointers;
+package pointers;
 
-public class Tests
-{
-    [Xunit.Fact]
+import org.junit.jupiter.api.Test;
+
+public class Tests {
+    @Test
     public void ValidateContainsDefaultEnrollment()
     {
         var office = new StudentSupportOffice();
@@ -13,7 +14,7 @@ public class Tests
 
         Xunit.Assert.Contains(modules["CIS2344"].Students, x => x.StudentId == "U0000001");
         Xunit.Assert.Contains(modules["CIS2344"].Students, x => x.StudentId == "U0000004");
-        
+
         Xunit.Assert.Contains(modules["CIS2360"].Students, x => x.StudentId == "U0000001");
         Xunit.Assert.Contains(modules["CIS2360"].Students, x => x.StudentId == "U0000003");
         Xunit.Assert.Contains(modules["CIS2360"].Students, x => x.StudentId == "U0000005");
@@ -22,7 +23,7 @@ public class Tests
         Xunit.Assert.Contains(modules["CIM2130"].Students, x => x.StudentId == "U0000004");
         Xunit.Assert.Contains(modules["CIM2130"].Students, x => x.StudentId == "U0000005");
     }
-    
+
     [Xunit.Fact]
     public void ValidateOrderedByIdDefaultEnrollment()
     {
@@ -34,7 +35,7 @@ public class Tests
 
         Xunit.Assert.True(modules["CIS2344"].Students[0].StudentId == "U0000001");
         Xunit.Assert.True(modules["CIS2344"].Students[1].StudentId == "U0000004");
-        
+
         Xunit.Assert.True(modules["CIS2360"].Students[0].StudentId == "U0000001");
         Xunit.Assert.True(modules["CIS2360"].Students[1].StudentId == "U0000003");
         Xunit.Assert.True(modules["CIS2360"].Students[2].StudentId == "U0000005");
@@ -43,7 +44,7 @@ public class Tests
         Xunit.Assert.True(modules["CIM2130"].Students[1].StudentId == "U0000004");
         Xunit.Assert.True(modules["CIM2130"].Students[2].StudentId == "U0000005");
     }
-    
+
     [Xunit.Fact]
     public void ValidateOrderedByNameDefaultEnrollment()
     {
@@ -55,7 +56,7 @@ public class Tests
 
         Xunit.Assert.True(modules["CIS2344"].Students[0].Surname == "Foster");
         Xunit.Assert.True(modules["CIS2344"].Students[1].Surname == "Hall");
-        
+
         Xunit.Assert.True(modules["CIS2360"].Students[0].Surname == "Conhee");
         Xunit.Assert.True(modules["CIS2360"].Students[1].Surname == "Hall");
         Xunit.Assert.True(modules["CIS2360"].Students[2].Surname == "Musk");
@@ -64,7 +65,7 @@ public class Tests
         Xunit.Assert.True(modules["CIM2130"].Students[1].Surname == "Foster");
         Xunit.Assert.True(modules["CIM2130"].Students[2].Surname == "Musk");
     }
-    
+
     [Xunit.Fact]
     public void ValidateOrderedByAgeDefaultEnrollment()
     {
@@ -76,7 +77,7 @@ public class Tests
 
         Xunit.Assert.True(modules["CIS2344"].Students[0].Age == 20);
         Xunit.Assert.True(modules["CIS2344"].Students[1].Age == 21);
-        
+
         Xunit.Assert.True(modules["CIS2360"].Students[0].Age == 19);
         Xunit.Assert.True(modules["CIS2360"].Students[1].Age == 21);
         Xunit.Assert.True(modules["CIS2360"].Students[2].Age == 40);
@@ -85,7 +86,7 @@ public class Tests
         Xunit.Assert.True(modules["CIM2130"].Students[1].Age == 20);
         Xunit.Assert.True(modules["CIM2130"].Students[2].Age == 40);
     }
-    
+
     [Xunit.Fact]
     public void ValidateContainsEnrollmentChanges()
     {
@@ -102,7 +103,7 @@ public class Tests
         Xunit.Assert.Contains(modules["CIS2344"].Students, x => x.StudentId == "U0000004");
         Xunit.Assert.Contains(modules["CIS2344"].Students, x => x.StudentId == "U0000005");
         Xunit.Assert.Equal(5, modules["CIS2344"].ClassCount);
-        
+
         Xunit.Assert.Contains(modules["CIS2360"].Students, x => x.StudentId == "U0000001");
         Xunit.Assert.Contains(modules["CIS2360"].Students, x => x.StudentId == "U0000002");
         Xunit.Assert.Contains(modules["CIS2360"].Students, x => x.StudentId == "U0000005");
