@@ -1,117 +1,147 @@
 package pointers;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Map;
 
 public class Tests {
     @Test
     public void ValidateContainsDefaultEnrollment()
     {
         var office = new StudentSupportOffice();
-        IReadOnlyDictionary<string, Module> modules = office.CreateDefaultModules();
-        IReadOnlyDictionary<string, Student> students = office.CreateDefaultStudents();
+        Map<String, Module> modules = office.getAndCreateDefaultModules(new StudentIdComparator());
+        Map<String, Student> students = office.getAndCreateDefaultStudents();
 
-        office.DefaultEnrollment(modules, students);
+        office.defaultEnrollment(modules, students);
 
-        Xunit.Assert.Contains(modules["CIS2344"].Students, x => x.StudentId == "U0000001");
-        Xunit.Assert.Contains(modules["CIS2344"].Students, x => x.StudentId == "U0000004");
+        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000001"));
+        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000004"));
 
-        Xunit.Assert.Contains(modules["CIS2360"].Students, x => x.StudentId == "U0000001");
-        Xunit.Assert.Contains(modules["CIS2360"].Students, x => x.StudentId == "U0000003");
-        Xunit.Assert.Contains(modules["CIS2360"].Students, x => x.StudentId == "U0000005");
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000001"));
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000003"));
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000005"));
 
-        Xunit.Assert.Contains(modules["CIM2130"].Students, x => x.StudentId == "U0000003");
-        Xunit.Assert.Contains(modules["CIM2130"].Students, x => x.StudentId == "U0000004");
-        Xunit.Assert.Contains(modules["CIM2130"].Students, x => x.StudentId == "U0000005");
+        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000003"));
+        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000004"));
+        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000005"));
     }
 
-    [Xunit.Fact]
+    @Test
     public void ValidateOrderedByIdDefaultEnrollment()
     {
         var office = new StudentSupportOffice();
-        IReadOnlyDictionary<string, Module> modules = office.CreateDefaultModules(new StudentIdComparer());
-        IReadOnlyDictionary<string, Student> students = office.CreateDefaultStudents();
+        Map<String, Module> modules = office.getAndCreateDefaultModules(new StudentIdComparator());
+        Map<String, Student> students = office.getAndCreateDefaultStudents();
 
-        office.DefaultEnrollment(modules, students);
+        office.defaultEnrollment(modules, students);
 
-        Xunit.Assert.True(modules["CIS2344"].Students[0].StudentId == "U0000001");
-        Xunit.Assert.True(modules["CIS2344"].Students[1].StudentId == "U0000004");
+        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000001"));
+        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000004"));
 
-        Xunit.Assert.True(modules["CIS2360"].Students[0].StudentId == "U0000001");
-        Xunit.Assert.True(modules["CIS2360"].Students[1].StudentId == "U0000003");
-        Xunit.Assert.True(modules["CIS2360"].Students[2].StudentId == "U0000005");
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000001"));
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000003"));
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000005"));
 
-        Xunit.Assert.True(modules["CIM2130"].Students[0].StudentId == "U0000003");
-        Xunit.Assert.True(modules["CIM2130"].Students[1].StudentId == "U0000004");
-        Xunit.Assert.True(modules["CIM2130"].Students[2].StudentId == "U0000005");
+        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000003"));
+        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000004"));
+        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000005"));
     }
 
-    [Xunit.Fact]
+    @Test
     public void ValidateOrderedByNameDefaultEnrollment()
     {
         var office = new StudentSupportOffice();
-        IReadOnlyDictionary<string, Module> modules = office.CreateDefaultModules(new StudentNameComparer());
-        IReadOnlyDictionary<string, Student> students = office.CreateDefaultStudents();
+        Map<String, Module> modules = office.getAndCreateDefaultModules(new StudentNameComparator());
+        Map<String, Student> students = office.getAndCreateDefaultStudents();
 
-        office.DefaultEnrollment(modules, students);
+        office.defaultEnrollment(modules, students);
 
-        Xunit.Assert.True(modules["CIS2344"].Students[0].Surname == "Foster");
-        Xunit.Assert.True(modules["CIS2344"].Students[1].Surname == "Hall");
+        assertEquals(modules.get("CIS2344").getStudents().get(0).getSurname(), "Foster");
+        assertEquals(modules.get("CIS2344").getStudents().get(1).getSurname(), "Hall");
 
-        Xunit.Assert.True(modules["CIS2360"].Students[0].Surname == "Conhee");
-        Xunit.Assert.True(modules["CIS2360"].Students[1].Surname == "Hall");
-        Xunit.Assert.True(modules["CIS2360"].Students[2].Surname == "Musk");
+        assertEquals(modules.get("CIS2360").getStudents().get(0).getSurname(), "Conhee");
+        assertEquals(modules.get("CIS2360").getStudents().get(1).getSurname(), "Hall");
+        assertEquals(modules.get("CIS2360").getStudents().get(2).getSurname(), "Musk");
 
-        Xunit.Assert.True(modules["CIM2130"].Students[0].Surname == "Conhee");
-        Xunit.Assert.True(modules["CIM2130"].Students[1].Surname == "Foster");
-        Xunit.Assert.True(modules["CIM2130"].Students[2].Surname == "Musk");
+        assertEquals(modules.get("CIM2130").getStudents().get(0).getSurname(), "Conhee");
+        assertEquals(modules.get("CIM2130").getStudents().get(1).getSurname(), "Foster");
+        assertEquals(modules.get("CIM2130").getStudents().get(2).getSurname(), "Musk");
     }
 
-    [Xunit.Fact]
+    @Test
     public void ValidateOrderedByAgeDefaultEnrollment()
     {
         var office = new StudentSupportOffice();
-        IReadOnlyDictionary<string, Module> modules = office.CreateDefaultModules(new StudentAgeComparer());
-        IReadOnlyDictionary<string, Student> students = office.CreateDefaultStudents();
+        Map<String, Module> modules = office.getAndCreateDefaultModules(new StudentAgeComparator());
+        Map<String, Student> students = office.getAndCreateDefaultStudents();
 
-        office.DefaultEnrollment(modules, students);
+        office.defaultEnrollment(modules, students);
 
-        Xunit.Assert.True(modules["CIS2344"].Students[0].Age == 20);
-        Xunit.Assert.True(modules["CIS2344"].Students[1].Age == 21);
+        assertEquals(modules.get("CIS2344").getStudents().get(0).getAge(), 21);
+        assertEquals(modules.get("CIS2344").getStudents().get(1).getAge(), 22);
 
-        Xunit.Assert.True(modules["CIS2360"].Students[0].Age == 19);
-        Xunit.Assert.True(modules["CIS2360"].Students[1].Age == 21);
-        Xunit.Assert.True(modules["CIS2360"].Students[2].Age == 40);
+        assertEquals(modules.get("CIS2360").getStudents().get(0).getAge(), 20);
+        assertEquals(modules.get("CIS2360").getStudents().get(1).getAge(), 22);
+        assertEquals(modules.get("CIS2360").getStudents().get(2).getAge(), 51);
 
-        Xunit.Assert.True(modules["CIM2130"].Students[0].Age == 19);
-        Xunit.Assert.True(modules["CIM2130"].Students[1].Age == 20);
-        Xunit.Assert.True(modules["CIM2130"].Students[2].Age == 40);
+        assertEquals(modules.get("CIM2130").getStudents().get(0).getAge(), 20);
+        assertEquals(modules.get("CIM2130").getStudents().get(1).getAge(), 21);
+        assertEquals(modules.get("CIM2130").getStudents().get(2).getAge(), 51);
     }
 
-    [Xunit.Fact]
+    @Test
     public void ValidateContainsEnrollmentChanges()
     {
         var office = new StudentSupportOffice();
-        IReadOnlyDictionary<string, Module> modules = office.CreateDefaultModules();
-        IReadOnlyDictionary<string, Student> students = office.CreateDefaultStudents();
+        Map<String, Module> modules = office.getAndCreateDefaultModules(new StudentIdComparator());
+        Map<String, Student> students = office.getAndCreateDefaultStudents();
 
-        office.DefaultEnrollment(modules, students);
-        office.EnrollmentChanges(modules, students);
+        office.defaultEnrollment(modules, students);
+        office.enrollmentChanges(modules, students);
 
-        Xunit.Assert.Contains(modules["CIS2344"].Students, x => x.StudentId == "U0000001");
-        Xunit.Assert.Contains(modules["CIS2344"].Students, x => x.StudentId == "U0000002");
-        Xunit.Assert.Contains(modules["CIS2344"].Students, x => x.StudentId == "U0000003");
-        Xunit.Assert.Contains(modules["CIS2344"].Students, x => x.StudentId == "U0000004");
-        Xunit.Assert.Contains(modules["CIS2344"].Students, x => x.StudentId == "U0000005");
-        Xunit.Assert.Equal(5, modules["CIS2344"].ClassCount);
+        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000001"));
+        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000002"));
+        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000003"));
+        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000004"));
+        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000005"));
+        assertEquals(modules.get("CIS2344").getClassCount(), 5);
 
-        Xunit.Assert.Contains(modules["CIS2360"].Students, x => x.StudentId == "U0000001");
-        Xunit.Assert.Contains(modules["CIS2360"].Students, x => x.StudentId == "U0000002");
-        Xunit.Assert.Contains(modules["CIS2360"].Students, x => x.StudentId == "U0000005");
-        Xunit.Assert.Equal(3, modules["CIS2360"].ClassCount);
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000001"));
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000002"));
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000005"));
+        assertEquals(modules.get("CIS2360").getClassCount(), 3);
 
-        Xunit.Assert.Contains(modules["CIM2130"].Students, x => x.StudentId == "U0000001");
-        Xunit.Assert.Contains(modules["CIM2130"].Students, x => x.StudentId == "U0000003");
-        Xunit.Assert.Contains(modules["CIM2130"].Students, x => x.StudentId == "U0000004");
-        Xunit.Assert.Equal(3, modules["CIM2130"].ClassCount);
+        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000001"));
+        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000003"));
+        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000004"));
+        assertEquals(modules.get("CIM2130").getClassCount(), 3);
     }
 }
