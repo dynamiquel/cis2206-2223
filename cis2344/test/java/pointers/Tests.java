@@ -15,23 +15,23 @@ public class Tests {
 
         office.defaultEnrollment(modules, students);
 
-        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2206").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000001"));
-        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
-                x -> x.getStudentId() == "U0000004"));
-
-        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
-                x -> x.getStudentId() == "U0000001"));
-        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
-                x -> x.getStudentId() == "U0000003"));
-        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2206").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000005"));
 
-        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000001"));
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000003"));
-        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000004"));
-        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+
+        assertTrue(modules.get("CIS2205").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000002"));
+        assertTrue(modules.get("CIS2205").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000004"));
+        assertTrue(modules.get("CIS2205").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000005"));
     }
 
@@ -44,23 +44,23 @@ public class Tests {
 
         office.defaultEnrollment(modules, students);
 
-        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2206").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000001"));
-        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
-                x -> x.getStudentId() == "U0000004"));
-
-        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
-                x -> x.getStudentId() == "U0000001"));
-        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
-                x -> x.getStudentId() == "U0000003"));
-        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2206").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000005"));
 
-        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000001"));
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000003"));
-        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000004"));
-        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+
+        assertTrue(modules.get("CIS2205").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000002"));
+        assertTrue(modules.get("CIS2205").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000004"));
+        assertTrue(modules.get("CIS2205").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000005"));
     }
 
@@ -73,16 +73,16 @@ public class Tests {
 
         office.defaultEnrollment(modules, students);
 
-        assertEquals(modules.get("CIS2344").getStudents().get(0).getSurname(), "Foster");
-        assertEquals(modules.get("CIS2344").getStudents().get(1).getSurname(), "Hall");
+        assertEquals(modules.get("CIS2206").getStudents().get(0).getSurname(), "Hall");
+        assertEquals(modules.get("CIS2206").getStudents().get(1).getSurname(), "Musk");
 
         assertEquals(modules.get("CIS2360").getStudents().get(0).getSurname(), "Conhee");
-        assertEquals(modules.get("CIS2360").getStudents().get(1).getSurname(), "Hall");
-        assertEquals(modules.get("CIS2360").getStudents().get(2).getSurname(), "Musk");
+        assertEquals(modules.get("CIS2360").getStudents().get(1).getSurname(), "Foster");
+        assertEquals(modules.get("CIS2360").getStudents().get(2).getSurname(), "Hall");
 
-        assertEquals(modules.get("CIM2130").getStudents().get(0).getSurname(), "Conhee");
-        assertEquals(modules.get("CIM2130").getStudents().get(1).getSurname(), "Foster");
-        assertEquals(modules.get("CIM2130").getStudents().get(2).getSurname(), "Musk");
+        assertEquals(modules.get("CIS2205").getStudents().get(0).getSurname(), "Foster");
+        assertEquals(modules.get("CIS2205").getStudents().get(1).getSurname(), "Musk");
+        assertEquals(modules.get("CIS2205").getStudents().get(2).getSurname(), "Sinla");
     }
 
     @Test
@@ -94,16 +94,16 @@ public class Tests {
 
         office.defaultEnrollment(modules, students);
 
-        assertEquals(modules.get("CIS2344").getStudents().get(0).getAge(), 21);
-        assertEquals(modules.get("CIS2344").getStudents().get(1).getAge(), 22);
+        assertEquals(modules.get("CIS2206").getStudents().get(0).getAge(), 22);
+        assertEquals(modules.get("CIS2206").getStudents().get(1).getAge(), 51);
 
         assertEquals(modules.get("CIS2360").getStudents().get(0).getAge(), 20);
-        assertEquals(modules.get("CIS2360").getStudents().get(1).getAge(), 22);
-        assertEquals(modules.get("CIS2360").getStudents().get(2).getAge(), 51);
+        assertEquals(modules.get("CIS2360").getStudents().get(1).getAge(), 21);
+        assertEquals(modules.get("CIS2360").getStudents().get(2).getAge(), 22);
 
-        assertEquals(modules.get("CIM2130").getStudents().get(0).getAge(), 20);
-        assertEquals(modules.get("CIM2130").getStudents().get(1).getAge(), 21);
-        assertEquals(modules.get("CIM2130").getStudents().get(2).getAge(), 51);
+        assertEquals(modules.get("CIS2205").getStudents().get(0).getAge(), 21);
+        assertEquals(modules.get("CIS2205").getStudents().get(1).getAge(), 30);
+        assertEquals(modules.get("CIS2205").getStudents().get(2).getAge(), 51);
     }
 
     @Test
@@ -116,32 +116,32 @@ public class Tests {
         office.defaultEnrollment(modules, students);
         office.enrollmentChanges(modules, students);
 
-        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2206").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000001"));
-        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
-                x -> x.getStudentId() == "U0000002"));
-        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2206").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000003"));
-        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2206").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000004"));
-        assertTrue(modules.get("CIS2344").getStudents().stream().anyMatch(
-                x -> x.getStudentId() == "U0000005"));
-        assertEquals(modules.get("CIS2344").getClassCount(), 5);
+        assertEquals(modules.get("CIS2206").getClassCount(), 3);
 
         assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000001"));
         assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
-                x -> x.getStudentId() == "U0000002"));
+                x -> x.getStudentId() == "U0000003"));
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000004"));
         assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000005"));
-        assertEquals(modules.get("CIS2360").getClassCount(), 3);
+        assertTrue(modules.get("CIS2360").getStudents().stream().anyMatch(
+                x -> x.getStudentId() == "U0000005"));
+        assertEquals(modules.get("CIS2360").getClassCount(), 5);
 
-        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2205").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000001"));
-        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2205").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000003"));
-        assertTrue(modules.get("CIM2130").getStudents().stream().anyMatch(
+        assertTrue(modules.get("CIS2205").getStudents().stream().anyMatch(
                 x -> x.getStudentId() == "U0000004"));
-        assertEquals(modules.get("CIM2130").getClassCount(), 3);
+        assertEquals(modules.get("CIS2205").getClassCount(), 3);
     }
 }

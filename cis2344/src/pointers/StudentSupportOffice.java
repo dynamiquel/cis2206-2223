@@ -9,9 +9,9 @@ public class StudentSupportOffice {
         // Creates the required modules with the specified comparator.
         // Using a hash map to store modules as it makes it easier and faster to reference by ModuleID.
         var modules = new HashMap<String, Module>(3);
-        modules.put("CIS2344", new Module("CIS2344", comparator));
+        modules.put("CIS2206", new Module("CIS2206", comparator));
         modules.put("CIS2360", new Module("CIS2360", comparator));
-        modules.put("CIM2130", new Module("CIM2130", comparator));
+        modules.put("CIS2205", new Module("CIS2205", comparator));
 
         return modules;
     }
@@ -43,32 +43,34 @@ public class StudentSupportOffice {
     public void defaultEnrollment(Map<String, Module> modules, Map<String, Student> students)
     {
         // The default enrollment criteria as specified in the assignment.
-        modules.get("CIS2344").enroll(students.get("U0000001"));
-        modules.get("CIS2344").enroll(students.get("U0000004"));
+        modules.get("CIS2206").enroll(students.get("U0000001"));
+        modules.get("CIS2206").enroll(students.get("U0000005"));
 
         modules.get("CIS2360").enroll(students.get("U0000001"));
         modules.get("CIS2360").enroll(students.get("U0000003"));
-        modules.get("CIS2360").enroll(students.get("U0000005"));
+        modules.get("CIS2360").enroll(students.get("U0000004"));
 
-        modules.get("CIM2130").enroll(students.get("U0000003"));
-        modules.get("CIM2130").enroll(students.get("U0000004"));
-        modules.get("CIM2130").enroll(students.get("U0000005"));
+        modules.get("CIS2205").enroll(students.get("U0000002"));
+        modules.get("CIS2205").enroll(students.get("U0000004"));
+        modules.get("CIS2205").enroll(students.get("U0000005"));
     }
 
     public void enrollmentChanges(Map<String, Module> modules, Map<String, Student> students)
     {
         // The end of enrollment criteria as specified in the assignment.
-        modules.get("CIS2344").enroll(students.get("U0000002"));
-        modules.get("CIS2344").enroll(students.get("U0000003"));
+        modules.get("CIS2206").enroll(students.get("U0000003"));
+        modules.get("CIS2206").enroll(students.get("U0000004"));
+        modules.get("CIS2206").disenroll(students.get("U0000005"));
+
         // Evidence that duplicate students can't exist.
-        modules.get("CIS2344").enroll(students.get("U0000004"));
-        modules.get("CIS2344").enroll(students.get("U0000005"));
+        modules.get("CIS2206").enroll(students.get("U0000003"));
 
         modules.get("CIS2360").enroll(students.get("U0000002"));
-        modules.get("CIS2360").disenroll(students.get("U0000003"));
+        modules.get("CIS2360").enroll(students.get("U0000005"));
 
-
-        modules.get("CIM2130").enroll(students.get("U0000001"));
-        modules.get("CIM2130").disenroll(students.get("U0000005"));
+        modules.get("CIS2205").enroll(students.get("U0000001"));
+        modules.get("CIS2205").enroll(students.get("U0000003"));
+        modules.get("CIS2205").disenroll(students.get("U0000002"));
+        modules.get("CIS2205").disenroll(students.get("U0000005"));
     }
 }
