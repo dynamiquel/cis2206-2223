@@ -1,4 +1,4 @@
-package lists;
+package Practical_12;
 
 import java.util.Comparator;
 

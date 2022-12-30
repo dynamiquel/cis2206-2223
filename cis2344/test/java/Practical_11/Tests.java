@@ -1,4 +1,4 @@
-package pointers;
+package Practical_11;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
