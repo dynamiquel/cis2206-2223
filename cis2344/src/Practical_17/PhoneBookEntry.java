@@ -48,15 +48,36 @@ public class PhoneBookEntry {
     }
 
     private boolean isValidPhoneNumber(String phoneNumber) {
-        // First regex allows international numbers (without spaces) i.e. +44 7862485769 or +447862485769.
-        // Second regex allows UK numbers starting with 0 (without spaces) i.e. 07538332719.
-        return phoneNumber.matches("^(\\+\\d{1,3}( )?)?(\\d{10})$") ||
-                phoneNumber.matches("^([0]\\d{10})$");
+        // Regex allows international numbers (without spaces) i.e. +44 7862485769 or +447862485769.
+        // As well as UK numbers starting with 0 and have a total of 11 characters. i.e. 07538332719.
+        return phoneNumber.matches("^(\\+\\d{1,3}( )?|[0])(\\d{10})$") ;
     }
 
     public boolean isValid() {
         // Phone number will not be empty if this is a valid entry.
         return phoneNumber != null && !phoneNumber.isEmpty();
+    }
+
+    /**
+     * Easy way to clone this object while providing a new Phone Number.
+     */
+    public PhoneBookEntry clone(String newPhoneNumber) {
+        return clone(newPhoneNumber, null, null);
+    }
+
+    /**
+     * Easy way to clone this object while providing a new Phone Number, Email Address and Home Address.
+     * Use null string or an empty string for parameters you do not wish to override.
+     */
+    public PhoneBookEntry clone(String newPhoneNumber, String newEmailAddress, String newHomeAddress) {
+        // If a given parameter is a not empty string, use that as the new attribute.
+        // Else, use the original value.
+        return new PhoneBookEntry(
+                getSurname(),
+                getForename(),
+                newPhoneNumber == null || newPhoneNumber.isEmpty() ? getPhoneNumber() : newPhoneNumber,
+                newEmailAddress == null || newEmailAddress.isEmpty() ? getEmailAddress() : newEmailAddress,
+                newHomeAddress == null || newHomeAddress.isEmpty() ? getHomeAddress() : newHomeAddress);
     }
 
     @Override
