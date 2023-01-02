@@ -11,7 +11,7 @@ public class CalculatorTests {
         double result = 0;
         try {
             result = calculator.calculatePostfix(postFixExpression);
-        } catch (InvalidPostfixExpressionException | InvalidTokenTypeException e) {
+        } catch (InvalidPostfixExpressionException | InvalidTokenTypeException | InvalidResultException e) {
             e.printStackTrace();
         }
 
@@ -25,7 +25,7 @@ public class CalculatorTests {
         double result = 0;
         try {
             result = calculator.calculatePostfix(postFixExpression);
-        } catch (InvalidPostfixExpressionException | InvalidTokenTypeException e) {
+        } catch (InvalidPostfixExpressionException | InvalidTokenTypeException | InvalidResultException e) {
             e.printStackTrace();
         }
 

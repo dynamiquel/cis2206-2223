@@ -15,6 +15,7 @@ public class PhoneBook {
         if (entry == null || !entry.isValid())
             return false;
 
+        // Insert the new entry into the map. Will overwrite existing entries with the same name.
         entries.put(entry.getFullName(), entry);
         return true;
     }

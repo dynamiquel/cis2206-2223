@@ -5,9 +5,12 @@ import java.util.Stack;
 
 public class Calculator {
 
-    public double calculatePostfix(String postfixExpression) throws InvalidPostfixExpressionException, InvalidTokenTypeException {
+    public double calculatePostfix(String postfixExpression) throws InvalidPostfixExpressionException, InvalidTokenTypeException, InvalidResultException {
+        // Convert the postfix expression from a string to an array of tokens.
         String[] splitPostfix = splitPostfix(postfixExpression);
 
+        // It's not possible to have a postfix expression with less than three tokens as
+        // two operands and one operator are required.
         if (splitPostfix.length < 3)
             throw new InvalidPostfixExpressionException();
 
@@ -19,6 +22,7 @@ public class Calculator {
         System.out.println("Method    | Return value | Stack Contents");
         System.out.println("-----------------------------------------");
 
+        // Keep looping until all the tokens from the postfix expression have been processed.
         while (hasNextPostfixToken(currentPostfixTokenIndex, splitPostfix)) {
             String currentToken = getNextPostfixToken(currentPostfixTokenIndex, splitPostfix);
             currentPostfixTokenIndex++;
@@ -33,11 +37,15 @@ public class Calculator {
             }
         }
 
+        // All tokens from the postfix expression have been processed.
+
+        // The final token in the stack should be the result of the expression.
+        // If it is not a number then the postfix expression is invalid.
         var finalToken = pop(stack);
         if (isNumber(finalToken))
             return Double.parseDouble(finalToken);
 
-        throw new InvalidOperandException();
+        throw new InvalidResultException();
     }
 
     private String[] splitPostfix(String postfixExpression) {
@@ -45,6 +53,7 @@ public class Calculator {
     }
 
     private boolean hasNextPostfixToken(int currentPostfixTokenIndex, String[] splitPostfix) {
+        // Haven't reached the end of the token array yet.
         return currentPostfixTokenIndex >= 0 && currentPostfixTokenIndex < splitPostfix.length;
     }
 
@@ -64,6 +73,7 @@ public class Calculator {
     }
 
     private static boolean isNumber(String number) {
+        // Check if the string is a number by trying to convert it to a double.
         try {
             Double.parseDouble(number);
             return true;
@@ -101,6 +111,7 @@ public class Calculator {
 
         try {
             // Pop 3 times (the operator, num 1 and num2).
+            // If cannot pop, then this is an invalid postfix expression.
             operatorToken = pop(tokenStack);
             operandRightToken = pop(tokenStack);
             operandLeftToken = pop(tokenStack);
@@ -113,6 +124,7 @@ public class Calculator {
         try {
 
             // Convert operands to doubles.
+            // If cannot convert, then these are invalid operands.
             operandRight = Double.parseDouble(operandRightToken);
             operandLeft = Double.parseDouble(operandLeftToken);
 
@@ -123,10 +135,10 @@ public class Calculator {
         // Do to previous checks, there should never be a case where an operator token is invalid.
         double result = 0;
         switch (operatorToken) {
-            case "*" -> result = operandLeft * operandRight;
-            case "/" -> result = operandLeft / operandRight;
-            case "+" -> result = operandLeft + operandRight;
-            case "-" -> result = operandLeft - operandRight;
+            case "*" -> result = operandLeft * operandRight /* multiply */;
+            case "/" -> result = operandLeft / operandRight /* divide */;
+            case "+" -> result = operandLeft + operandRight /* add */;
+            case "-" -> result = operandLeft - operandRight /* subtract */;
         }
 
         push(tokenStack, doubleToString(result));
@@ -146,4 +158,7 @@ class InvalidTokenTypeException extends Exception {
 }
 
 class InvalidOperandException extends NumberFormatException {
+}
+
+class InvalidResultException extends Exception {
 }

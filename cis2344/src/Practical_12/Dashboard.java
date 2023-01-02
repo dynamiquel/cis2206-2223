@@ -7,6 +7,8 @@ public class Dashboard {
     private FootballLeague league;
 
     public Map<String, Team> createDefaultTeams() {
+        // Example teams to implement dashboard behaviour.
+        // Uses a map for easy referencing.
         var teams = new HashMap<String, Team>(6);
 
         teams.put("England", new Team("England"));
@@ -20,6 +22,8 @@ public class Dashboard {
     }
 
     public Map<String, FootballLeague> createDefaultLeagues() {
+        // Example leagues to implement dashboard behaviour.
+        // Uses a map for easy referencing.
         var leagues = new HashMap<String, FootballLeague>(2);
 
         leagues.put("Standard", new FootballLeague("Standard"));
@@ -28,6 +32,7 @@ public class Dashboard {
     }
 
     public void addDefaultTeams(Map<String, Team> teams, Map<String, FootballLeague> leagues) {
+        // Example team insertion to implement dashboard behaviour.
         leagues.get("Standard").addTeam(teams.get("England"));
         leagues.get("Standard").addTeam(teams.get("Scotland"));
         leagues.get("Standard").addTeam(teams.get("Wales"));
@@ -38,17 +43,20 @@ public class Dashboard {
     }
 
     public void removeTeams(Map<String, Team> teams, Map<String, FootballLeague> leagues) {
+        // Example team removal to implement dashboard behaviour.
         leagues.get("Standard").removeTeam(teams.get("Scotland"));
         System.out.println(leagues.get("Standard").toString());
     }
 
     public void relegateTeams(Map<String, Team> teams, Map<String, FootballLeague> leagues) {
+        // Example team relegation to implement dashboard behaviour.
         leagues.get("Standard").relegateTeams(leagues.get("Lowers"), 3);
         System.out.println(leagues.get("Standard").toString());
         System.out.println(leagues.get("Lowers").toString());
     }
 
     public void addScoreToTeams(Map<String, Team> teams, Map<String, FootballLeague> leagues) {
+        // Example team scoring to implement dashboard behaviour.
         leagues.get("Standard").declareWin(teams.get("England"), teams.get("Wales"));
         System.out.println(leagues.get("Standard").toString());
         leagues.get("Standard").declareWin(teams.get("France"), teams.get("Germany"));
