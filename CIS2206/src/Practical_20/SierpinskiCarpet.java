@@ -14,7 +14,7 @@ public class SierpinskiCarpet {
         for (int y = 0; y < boardSize; y++)
             board[x][y] = '*';
 
-        removeSubArray(0, 0, 0, getBoardSize());
+        removeSubArray(board,0, 0, 0, getBoardSize());
     }
 
     public int getBoardSize() {
@@ -29,12 +29,13 @@ public class SierpinskiCarpet {
 
 
     /** Removes centre cells from a scaled 3x3 board, interprets every cell as another scaled 3x3 board and repeats.
+     * @param board The original board. Useless but the assignment spec requires it for some reason.
      * @param cellIndex The cell index of the new board, starting from 0 from top-left to bottom-right.
      * @param prevStartX The X co-ordinate of the starting cell of the previous sub-board.
      * @param prevStartY The Y co-ordinate of the starting cell of the previous sub-board.
      * @param boardSize The size of the new board.
      */
-    private void removeSubArray(int cellIndex, int prevStartX, int prevStartY, int boardSize) {
+    private void removeSubArray(char[][] board, int cellIndex, int prevStartX, int prevStartY, int boardSize) {
         // Reinterpret the board as a scaled 3x3 board.
         int multiplier = boardSize / 3;
 
@@ -56,15 +57,15 @@ public class SierpinskiCarpet {
 
         // Do the same but with the remaining split board cells.
         if (boardSize > 3) {
-            removeSubArray(0, startX, startY, multiplier);
-            removeSubArray(1, startX, startY, multiplier);
-            removeSubArray(2, startX, startY, multiplier);
-            removeSubArray(3, startX, startY, multiplier);
+            removeSubArray(board, 0, startX, startY, multiplier);
+            removeSubArray(board,1, startX, startY, multiplier);
+            removeSubArray(board,2, startX, startY, multiplier);
+            removeSubArray(board,3, startX, startY, multiplier);
             // Cell index 4 is the centre and does not need processing.
-            removeSubArray(5, startX, startY, multiplier);
-            removeSubArray(6, startX, startY, multiplier);
-            removeSubArray(7, startX, startY, multiplier);
-            removeSubArray(8, startX, startY, multiplier);
+            removeSubArray(board,5, startX, startY, multiplier);
+            removeSubArray(board,6, startX, startY, multiplier);
+            removeSubArray(board,7, startX, startY, multiplier);
+            removeSubArray(board,8, startX, startY, multiplier);
         }
     }
 

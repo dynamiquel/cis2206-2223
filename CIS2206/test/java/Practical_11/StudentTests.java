@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
 
-public class Tests {
+public class StudentTests {
     @Test
     public void ValidateContainsDefaultEnrollment()
     {
